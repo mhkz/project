@@ -1,6 +1,6 @@
 {
 	"apps": [{
-		"name": "pro",
+		"name": "new-doc",
 		"script": "server.js",
 		//"instances": 2 服务器核心数配置
 		"env": {

@@ -2,6 +2,7 @@
 	"apps": [{
 		"name": "new-doc",
 		"script": "server.js",
+		//"instances": 2 服务器核心数配置
 		"env": {
 			"COMMON_VARIABLE": "true"
 		},
@@ -18,7 +19,7 @@
 			"repo": "https://github.com/mhkz/project.git",
 			"path": "/www/doc/production",
 			"ssh_options": "StrictHostKeyChecking=no",
-			"post-deploy": "git pull",
+//			"post-deploy": "npm install"
 			"pre-deploy-local": "echo 'Deploy Done'",
 			"env": {
 				"NODE_ENV": "production"

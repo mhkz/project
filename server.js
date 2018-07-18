@@ -1,8 +1,14 @@
-const Koa = require('koa')
-const app = new Koa()
+const http = require('http');
 
-app.use(async ctx => {
-  ctx.body = '您好，我是大白------'
+const hostname = '127.0.0.1';
+const port = 3000;
+
+const server = http.createServer((req, res) => {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/plain');
+  res.end('您好， 我是 大白--------');
 });
 
-app.listen(3000)
+server.listen(port, hostname, () => {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});

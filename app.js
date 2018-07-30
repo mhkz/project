@@ -4,6 +4,7 @@ const app = new Koa();
 const logger = require('koa-logger');
 const bodyparser = require('koa-bodyparser')
 const router = require('./route');
+const config = require('./config')
 
 // logger
 app.use(async (ctx, next) => {

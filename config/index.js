@@ -6,6 +6,14 @@
  *
  */
 
+const argv = require('yargs').argv
+
+exports.AUTH = {
+    jwtTokenSecret: argv.auth_key || 'mhkz',
+    defaultUsername: argv.auth_default_username || 'test',
+    defaultPassword: argv.auth_default_password || '123456'
+}
+
 exports.APP = {
     ROOT_PATH: '/api',
     LIMIT:  16,

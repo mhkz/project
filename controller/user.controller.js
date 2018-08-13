@@ -10,13 +10,13 @@ const userModel = require('../models/user');
 const statusCode = require('../utils/statusCode')
 
 class UserController {
+
     static async getUserList (ctx) {
         const userList = await userModel.findAllUserList();
         if (userList) {
             ctx.response.status = 200;
             ctx.body = statusCode.SUCCESS_200(userList)
         }
-
     }
 }
 

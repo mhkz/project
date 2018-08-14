@@ -30,10 +30,10 @@ const md5Decode = pwd => {
 };
 
 authCtrl.login.POST = async ctx => {
-    console.log('11111')
+
     const { username, password } = ctx.request.body;
-    const user = await Auth.findOne({ username })
-        .catch(err => ctx.throw(500, '服务器内部错误'));
+
+    const user = await Auth.findUserByName(username)
     if (user) {
         if (user.password === md5Decode(password)) {
             const token = jwt.sign({
@@ -46,7 +46,6 @@ authCtrl.login.POST = async ctx => {
     } else handleError({ ctx, message: "来者何人!" });
 };
 authCtrl.login.GET = async ctx => {
-    console.log('112212112')
     ctx.body = '222222'
 }
 exports.login = ctx => handleRequest({ ctx, controller: authCtrl.login });

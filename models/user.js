@@ -62,7 +62,7 @@ class UserModel {
             where: {
                 username
             }
-        })
+        }).catch(error => error)
     }
 }
 

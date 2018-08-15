@@ -7,7 +7,7 @@
  */
 
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('iquanku', 'root', '123456', {
+const sequelize = new Sequelize('mhkz', 'root', '123456', {
     host: 'localhost',
     dialect: 'mysql',
     operatorsAliases: false,

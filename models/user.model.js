@@ -8,7 +8,7 @@
 
 const db = require('../db/mysql');
 const Sequelize = db.sequelize;
-const User = Sequelize.import('../schema/user.js');
+const User = Sequelize.import('../schema/users.js');
 User.sync({force:false});
 
 class UserModel {

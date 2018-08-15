@@ -6,7 +6,7 @@
  *
  */
 
-const userModel = require('../models/user');
+const userModel = require('../models/user.model');
 const statusCode = require('../utils/statusCode')
 
 class UserController {

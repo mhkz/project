@@ -6,7 +6,7 @@
  *
  */
 
-const Auth = require("../models/user");
+const Auth = require("../models/user.model");
 const config = require("../config");
 
 const {

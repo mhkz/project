@@ -75,10 +75,15 @@ router.all('*', async (ctx, next) => {
 
 // Api
 router.get('/', (ctx, next) => {
-    ctx.response.body = config.INFO;
+    // ctx.response.body = config.INFO;
+    console.log("111")
+    ctx.response.body = JSON.stringify('这是首页');
 });
 
 router.post('/login', controller.auth.login);
+
+// 分类
+router.all('/category', controller.category.list)
 
 // // Auth
 // router.get('/auth', controller.auth);

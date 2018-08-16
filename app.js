@@ -7,6 +7,8 @@ const config = require('./config');
 const helmet = require('koa-helmet')
 const cors = require('koa-cors');
 const koaBody = require('koa-body'); // post 请求
+const mongodb = require('./db/mongodb');
+mongodb.connect();
 
 // logger
 app.use(async (ctx, next) => {

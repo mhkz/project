@@ -2,7 +2,7 @@
  * mongodb config
  */
 const mongoose = require('mongoose');
-const config	 = require('app.config');
+const config	 = require('../config/index');
 mongoose.Promise = global.Promise;
 
 exports.mongoose = mongoose;
@@ -11,7 +11,7 @@ exports.mongoose = mongoose;
 exports.connect = () => {
 
 	// 连接数据库
-	mongoose.connect(config.MONGODB.uri, {
+	mongoose.connect('mongodb://127.0.0.1:27017/mblog', {
 		useNewUrlParser: true,
 		promiseLibrary: global.Promise
 	});

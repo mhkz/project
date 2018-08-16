@@ -6,8 +6,6 @@
  * desc: 公共解析器
  */
 
-/* 公共解析器 */
-
 exports.handleRequest = ({ ctx, controller }) => {
     const method = ctx.request.method;
     const support = !!controller[method];

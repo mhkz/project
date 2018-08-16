@@ -5,13 +5,13 @@
 */
 
 const crypto = require('crypto');
-const config = require('app.config');
+const config = require('../config/index');
 
-const mongoose = require('np-core/np-mongodb').mongoose;
+const mongoose = require('../db/mongodb').mongoose;
 const authSchema = new mongoose.Schema({
 
 	// 名字
-	name: { type: String, default: '' },
+	username: { type: String, default: '' },
 
 	// 签名
 	slogan: { type: String, default: '' },

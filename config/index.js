@@ -10,7 +10,7 @@ const argv = require('yargs').argv
 
 exports.AUTH = {
     jwtTokenSecret: argv.auth_key || 'mhkz',
-    defaultUsername: argv.auth_default_username || 'test',
+    defaultUsername: argv.auth_default_username || 'mhkz',
     defaultPassword: argv.auth_default_password || '123456'
 }
 

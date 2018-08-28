@@ -1,5 +1,7 @@
 const authSchema = require('../schema/auth.schema');
 
+const crypto = require('crypto')
+
 class AuthModel {
 
     /**
@@ -8,11 +10,11 @@ class AuthModel {
      * @returns {Promise<boolean>}
      */
     static async create () {
-        // let {username, password} = user;
         await authSchema.create({
             username: 'mhkz',
             slogan: '武功再高也怕菜刀',
-            password: '123456'
+            password:crypto.createHash('md5').update('123456').digest('hex')
+
         })
         return true;
     }
@@ -36,9 +38,13 @@ class AuthModel {
      * @returns {Promise<*>}
      */
     static async findAllUserList() {
-        const userList = await authSchema.findAll({
-            attributes: ['id', 'username']
+        const userList = await authSchema.find({
+
         })
+            .exec()
+            .catch(err => {
+                ctx.throw(500, '服务器内部错误-查找admin错误！')
+            })
         return userList;
     }
 

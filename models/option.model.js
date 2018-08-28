@@ -1,0 +1,1 @@
+const authSchema = require('../schema/auth.schema');

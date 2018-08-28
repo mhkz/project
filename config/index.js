@@ -19,3 +19,10 @@ exports.APP = {
     LIMIT:  16,
     PORT: 3000
 }
+
+exports.INFO = {
+    title: '测试网站',
+    slogan:  '纸上得来终觉浅，绝知此事要躬行',
+}
+
+

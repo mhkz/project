@@ -22,6 +22,8 @@ const categorySchema = new mongoose.Schema({
 
 	// 分类描述
 	description: String,
+	// icon
+	description: String,
 
 	// 父分类ID
 	pid: { type: mongoose.Schema.Types.ObjectId, ref: 'Category', default: null },

@@ -8,128 +8,74 @@
 
 // 路由管理
 
-const config = require('../config');
-const controller = require('../controller');
-const authIsVerified = require('../utils/auth');
-const Router = require('koa-router');
-const { handleError } = require('../utils/handle');
+const config = require('../config')
+const controller = require('../controller')
+const authIsVerified = require('../utils/auth')
+const Router = require('koa-router')
 
 const router = new Router({
     prefix: config.APP.ROOT_PATH
 })
 
-// 拦截器
-router.all('*', async (ctx, next) => {
-
-    // Set Header
-    const allowedOrigins = ['127.0.0.1', 'localhost'];
-    const origin = ctx.request.headers.origin || '';
-    if (allowedOrigins.includes(origin) || origin.includes('localhost')) {
-        ctx.response.set('Access-Control-Allow-Origin', origin);
-    };
-    ctx.response.set({
-        // 'Access-Control-Allow-Headers': 'Authorization, Origin, No-Cache, X-Requested-With, If-Modified-Since, Pragma, Last-Modified, Cache-Control, Expires, Content-Type, X-E4M-With',
-        'Access-Control-Allow-Methods': 'PUT,PATCH,POST,GET,DELETE,OPTIONS',
-        'Access-Control-Max-Age': '1728000',
-        'Content-Type': 'application/json;charset=utf-8',
-        'X-Powered-By': 'mhkz 1.0.0'
-    });
-
-    // OPTIONS
-    // if (ctx.request.method == 'OPTIONS') {
-    //     ctx.response.sendStatus(200);
-    //     return false;
-    // };
-    //
-    // // 如果是生产环境，需要验证用户来源渠道，防止非正常请求
-    // if (Object.is(process.env.NODE_ENV, 'production')) {
-    //     const { origin, referer } = ctx.request.headers;
-    //     const originVerified = (!origin	|| origin.includes('localhost')) &&
-    //         (!referer || referer.includes('localhost'))
-    //     if (!originVerified) {
-    //         ctx.status = 403
-    //         ctx.response.body = { code: 0, message: '来者何人！' }
-    //         return false;
-    //     };
-    // };
-    //
-    // // 排除auth的post请求 && 评论的post请求 && like请求
-    // const isLike = Object.is(ctx.request.url, '/like') && Object.is(ctx.request.method, 'POST');
-    // const isPostAuth = Object.is(ctx.request.url, '/auth') && Object.is(ctx.request.method, 'POST');
-    // const isPostComment = Object.is(ctx.request.url, '/comment') && Object.is(ctx.request.method, 'POST');
-    // if (isLike || isPostAuth || isPostComment) {
-    //     next();
-    //     return false;
-    // };
-    //
-    // // 拦截所有非管路员的非get请求
-    // if (!authIsVerified(ctx.request) && !Object.is(ctx.request.method, 'GET')) {
-    //     ctx.status = 401
-    //     ctx.response.body = { code: 0, message: '来者何人！' }
-    //     return false;
-    // };
-
-    await next();
-    // this.body = 'hello world'
-});
 
 // Api
-router.get('/', (ctx, next) => {
-    // ctx.response.body = config.INFO;
-    console.log("111")
-    ctx.response.body = JSON.stringify('这是首页');
-});
+router
+    .get('/', (ctx, next) => {
+        ctx.response.body = config.INFO
+    })
 
-router.post('/login', controller.auth.login);
+    .get('/auth', controller.auth.getAuth) 																	// 获取用户信息
+    .put('/auth', controller.auth.putAuth) 																	// 修改用户信息
+    .post('/login', controller.auth.login) 																	// 登录
 
-// 分类
-router.all('/category', controller.category.list)
+    // .get('/option', controller.option.getOption) 														// 获取网站信息
+    // .put('/option', controller.option.putOption)														// 修改网站信息
+    //
+    // .get('/qiniu', controller.qiniu.getQN) 																	// 七牛 upToken
+    //
+    // .get('/hero', controller.heros.getHeros) 																// 获取留言墙
+    // .post('/hero', controller.heros.postHero)																// 添加留言墙
+    // .patch('/hero', controller.heros.patchHero) 														// 修改留言墙状态
+    // .delete('/hero/:id', controller.heros.deleteHero)												// 删除留言墙
+    //
+    // .get('/tag', controller.tag.getTags) 																		// 获取标签
+    // .post('/tag', controller.tag.postTag)																		// 添加标签
+    // .patch('/tag', controller.tag.patchTag)																	// 标签排序
+    // .put('/tag/:id', controller.tag.putTag)																	// 修改标签
+    // .delete('/tag/:id', controller.tag.deleteTag)														// 删除标签
+    //
+    // .get('/article', controller.article.getArts) 														// 文章列表
+    // .post('/article', controller.article.postArt)														// 添加文章
+    // .get('/article/:id', controller.article.getArt)													// 文章详情
+    // .patch('/article/:id', controller.article.patchArt)											// 修改文章状态
+    // .put('/article/:id', controller.article.putArt)													// 修改文章
+    // .delete('/article/:id', controller.article.deleteArt)										// 删除文章
+    // .get('/allArticle', controller.article.getAllArts)											// 文章归档
+    //
+    // .get('/comment', controller.comments.getComments)												// 评论列表
+    // .post('/comment', controller.comments.postComment)											// 增加评论
+    // .put('/comment/:id', controller.comments.putComment)								// 修改状态
+    // .delete('/comment/:id', controller.comments.deleteComment)							// 删除评论
+    //
+    // .post('/like', controller.like.postLike) 																// 喜欢文章 评论
+    //
+    // .get('/music/pic/:pic_id', controller.music.getPic)											// 音乐封面图
+    // .get('/music/lrc/:song_id', controller.music.getLrc)										// 音乐歌词
+    // .get('/music/url/:song_id', controller.music.getUrl)										// 音乐地址
+    // .get('/music/song/:song_id', controller.music.getSone)									// 音乐详情
+    // .get('/music/list/:play_list_id', controller.music.getList)							// 音乐列表
+    //
+    // .get('/book', controller.book.getBooks) 																 // 获取书本列表
+    // .post('/book', controller.book.postBook)																 // 添加书本
+    // .patch('/book/:id', controller.book.patchBook)													 // 修改书本状态
+    // .put('/book/:id', controller.book.putBook)															 // 修改书本
+    // .delete('/book/:id', controller.book.deleteBook)												 // 删除书本
+    //
+    // .get('/link', controller.link.getLinks) 																 // 获取友链列表
+    // .post('/link', controller.link.postLink)																 // 添加友链
+    // .patch('/link/:id', controller.link.patchLink)													 // 修改友链状态
+    // .put('/link/:id', controller.link.putLink)															 // 修改友链
+    // .delete('/link/:id', controller.link.deleteLink)												 // 删除友链
 
-// // Auth
-// router.get('/auth', controller.auth);
 
-// // 七牛Token
-// app.all('/qiniu', controller.qiniu);
-
-// 全局option
-// router.all('/option', controller.option);
-
-// // sitemap
-// app.get('/sitemap.xml', controller.sitemap);
-
-// like
-// router.post('/like', controller.like);
-
-
-// // music
-// app.get('/music/pic/:pic_id', controller.music.pic);
-// app.get('/music/lrc/:song_id', controller.music.lrc);
-// app.get('/music/url/:song_id', controller.music.url);
-// app.get('/music/song/:song_id', controller.music.song);
-// app.get('/music/list/:play_list_id', controller.music.list);
-
-// Tag
-// router.all('/tag', controller.tag.list);
-// router.all('/tag/:tag_id', controller.tag.item);
-
-// // Category
-// app.all('/category', controller.category.list);
-// app.all('/category/:category_id', controller.category.item);
-
-// // 评论
-// app.all('/comment', controller.comment.list);
-// app.all('/comment/:comment_id', controller.comment.item);
-
-// // Article
-// router.all('/article', controller.article.list);
-// router.all('/article/:article_id', controller.article.item);
-
-// // 404
-// router.all('*', async (ctx, next) => {
-// 	ctx.response.status(404).jsonp({
-// 		code: 0,
-// 		message: '无效的API请求'
-// 	})
-// });
-
-module.exports = router;
+module.exports = router

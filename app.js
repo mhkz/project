@@ -6,6 +6,10 @@ const router = require('./route');
 const config = require('./config');
 const helmet = require('koa-helmet')
 const cors = require('koa-cors');
+
+const initAdmin = require('./middlewares/initAdmin')
+const Interceptor = require('./middlewares/Interceptor')
+
 const koaBody = require('koa-body'); // post 请求
 const mongodb = require('./db/mongodb');
 mongodb.connect();
@@ -17,6 +21,9 @@ app.use(async (ctx, next) => {
     const ms = new Date() - start;
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+app.use(initAdmin)
+app.use(Interceptor)
+
 app.use(helmet());
 app.use(koaBody({
     jsonLimit: '10mb',

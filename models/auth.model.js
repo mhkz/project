@@ -43,7 +43,7 @@ class AuthModel {
         })
             .exec()
             .catch(err => {
-                ctx.throw(500, '服务器内部错误-查找admin错误！')
+                throw(500, '服务器内部错误-查找admin错误！')
             })
         return userList;
     }

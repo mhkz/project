@@ -23,6 +23,7 @@ const authToken = req => {
 // 验证权限
 const authIsVerified = req => {
     const token = authToken(req)
+    console.log("--------",token)
     if (token) {
         try {
             const decodedToken = jwt.verify(token, config.AUTH.jwtTokenSecret)

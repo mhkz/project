@@ -45,7 +45,7 @@ router
     // .delete('/tag/:id', controller.tag.deleteTag)														// 删除标签
     //
     // .get('/article', controller.article.getArts) 														// 文章列表
-    // .post('/article', controller.article.postArt)														// 添加文章
+    .post('/article', controller.article.postArt)														// 添加文章
     // .get('/article/:id', controller.article.getArt)													// 文章详情
     // .patch('/article/:id', controller.article.patchArt)											// 修改文章状态
     // .put('/article/:id', controller.article.putArt)													// 修改文章

@@ -112,20 +112,18 @@ class ArticleController {
 
     // 添加文章
     static async postArt (ctx) {
-        const res = new Article(ctx.request.body)
-            .save()
-            .catch(err => ctx.throw(500, '服务器内部错误'))
+        const res = Article.createArticle(ctx.request.body)
         if (res) {
             handleSuccess({ ctx, message: '添加文章成功' })
 
             // 百度 seo push
-            request.post({
-                url: `http://data.zz.baidu.com/urls?site=${config.BAIDU.site}&token=${config.BAIDU.token}`,
-                headers: { 'Content-Type': 'text/plain' },
-                body: `${config.INFO.site}/article/${res._id}`
-            }, (error, response, body) => {
-                console.log('推送结果：', body)
-            })
+            // request.post({
+            //     url: `http://data.zz.baidu.com/urls?site=${config.BAIDU.site}&token=${config.BAIDU.token}`,
+            //     headers: { 'Content-Type': 'text/plain' },
+            //     body: `${config.INFO.site}/article/${res._id}`
+            // }, (error, response, body) => {
+            //     console.log('推送结果：', body)
+            // })
 
         } else handleError({ ctx, message: '添加文章失败' })
     }
@@ -205,13 +203,13 @@ class ArticleController {
             handleSuccess({ ctx, message: '更新文章成功' })
 
             // 百度推送
-            request.post({
-                url: `http://data.zz.baidu.com/update?site=${config.BAIDU.site}&token=${config.BAIDU.token}`,
-                headers: { 'Content-Type': 'text/plain' },
-                body: `${config.INFO.site}/article/${_id}`
-            }, (error, response, body) => {
-                console.log('百度删除结果：', body);
-            })
+            // request.post({
+            //     url: `http://data.zz.baidu.com/update?site=${config.BAIDU.site}&token=${config.BAIDU.token}`,
+            //     headers: { 'Content-Type': 'text/plain' },
+            //     body: `${config.INFO.site}/article/${_id}`
+            // }, (error, response, body) => {
+            //     console.log('百度删除结果：', body);
+            // })
         } else handleError({ ctx, message: '更新文章失败' })
     }
 
